@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Vanderlee\Syllable\Syllable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +12,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register() : void
     {
-        //
+        Syllable::setCacheDir(storage_path(
+            'framework/cache'
+        ));
     }
 
     /**

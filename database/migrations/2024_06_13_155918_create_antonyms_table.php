@@ -6,25 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * @return void
-     */
     public function up() : void
     {
-        Schema::create('words', function (Blueprint $table) {
+        Schema::create('antonyms', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('word')->unique();
-            $table->string('syllable');
-            $table->text('meaning')->nullable();
+            $table->foreignUlid('word_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('antonym_id')->constrained('words')->cascadeOnDelete();
             $table->timestamps();
         });
     }
 
-    /**
-     * @return void
-     */
     public function down() : void
     {
-        Schema::dropIfExists('words');
+        Schema::dropIfExists('antonyms');
     }
 };

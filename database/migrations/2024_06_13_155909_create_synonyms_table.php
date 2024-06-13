@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up() : void
     {
-        Schema::create('words', function (Blueprint $table) {
+        Schema::create('synonyms', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('word')->unique();
-            $table->string('syllable');
-            $table->text('meaning')->nullable();
+            $table->foreignUlid('word_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('synonym_id')->constrained('words')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down() : void
     {
-        Schema::dropIfExists('words');
+        Schema::dropIfExists('synonyms');
     }
 };
